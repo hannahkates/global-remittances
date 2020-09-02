@@ -15,11 +15,15 @@ def convert(adjacency_list):
 
     for i,adj in enumerate(adjacency_list):
         # skip row 0 since it contains country names, not data
-        if(i == 2):
+        if(i > 0):
             # iterate through each item in the row, skipping column 0
             for n in range(1, len(adj)):
-                # store the source and target indices, renumbering with index 1 as 0
-                links.extend( [{'source':i-1,'target':n-1,'value':adj[n]}] )
+                # two conditions for recording links:
+                # - avoid circular reference. a country shouldn't send remittances to itself
+                # - only keep links where remittances > 0
+                if (i != n) & (adj[n] != "0"):
+                    # store the source and target indices, renumbering with index 1 as 0
+                    links.extend( [{'source':i-1,'target':n-1,'value':adj[n]}] )
 
     return {"nodes":nodes, "links":links}
 

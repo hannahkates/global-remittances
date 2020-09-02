@@ -8,16 +8,46 @@
   <meta name="description" content="The HTML5 Herald">
   <meta name="author" content="SitePoint">
 
-  <link rel="stylesheet" href="css/styles.css" />
+  <!-- <link rel="stylesheet" href="css/styles.css" /> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
   <h1>Global Network of Remittances</h1>
-  <div>
-  </div>
+  <!-- Create a div where the graph will take place -->
+  <div id="chart"></div>
   <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://unpkg.com/d3-array@1"></script>
+  <script src="https://unpkg.com/d3-collection@1"></script>
+  <script src="https://unpkg.com/d3-path@1"></script>
+  <script src="https://unpkg.com/d3-shape@1"></script>
+  <script src="https://unpkg.com/d3-sankey@0"></script>
+  <style>
+    body {
+      padding: 10px;
+      min-width: 600px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    #chart {
+      height: 500px;
+      font: 13px sans-serif;
+    }
+    .node rect {
+      fill-opacity: .9;
+      shape-rendering: crispEdges;
+      stroke-width: 0;
+    }
+    .node text {
+      text-shadow: 0 1px 0 #fff;
+    }
+    .link {
+      fill: none;
+      stroke: #000;
+      stroke-opacity: .2;
+    }
+  </style>
   <script src="js.js"></script>
 </body>
 </html>
