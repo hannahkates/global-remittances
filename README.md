@@ -1,4 +1,4 @@
-# Data Viz: Global Network of Remittances
+# Data Viz: Global Flow of Remittances
 
 ## About
 This is a d3.js data visualization of remittances between all countries in the world. It shows the transfer relationships and estimated amounts.
