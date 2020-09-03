@@ -11,7 +11,7 @@ def convert(adjacency_list):
     links = []
 
     # specify minumum transfer $ amount to filter links by
-    min_transfer = 3000
+    min_transfer = 2000
 
     for i,adj in enumerate(adjacency_list):
         # skip row 0 since it contains country names, not data
