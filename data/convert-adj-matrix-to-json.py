@@ -7,11 +7,11 @@ with open('Bilateralremittancematrix2018Oct2019.csv', newline='') as csvfile:
 def convert(adjacency_list):
     # skip the index of 0, because in the CSV, row 0 and column 0 are used for the country names
 
-    # create list of nodes, including their index (renumbering with index 1 as 0) and name
-    nodes = [{"index": i-1, "name": mydata[0][i]} for i in range(1, len(adjacency_list))]
-
     # create empty list called links that will be populated during the for loop
     links = []
+
+    # specify minumum transfer $ amount to filter links by
+    min_transfer = 3000
 
     for i,adj in enumerate(adjacency_list):
         # skip row 0 since it contains country names, not data
@@ -21,9 +21,26 @@ def convert(adjacency_list):
                 # two conditions for recording links:
                 # - avoid circular reference. a country shouldn't send remittances to itself
                 # - only keep links where remittances > 0
-                if (i != n) & (adj[n] != "0"):
-                    # store the source and target indices, renumbering with index 1 as 0
-                    links.extend( [{'source':i-1,'target':n-1,'value':adj[n]}] )
+                if (i != n) & (adj[n] != 'N/A'):
+                    if float(adj[n]) > min_transfer:
+                        # store the source and target indices, renumbering with index 1 as 0
+                        links.extend( [{"source":adj[0],"target":mydata[0][n],"value":float(adj[n])}] )
+
+    used_nodes = []
+    for i in links:
+        used_nodes.append(i["source"])
+        used_nodes.append(i["target"])
+
+    used_nodes = sorted(list(set(used_nodes)))
+
+    nodes = []
+    for i in range(len(used_nodes)):
+        nodes.extend( [{"index":i, "name":used_nodes[i]}] )
+        for l in links:
+            if (l["source"] == used_nodes[i]):
+                l["source"] = i
+            if (l["target"] == used_nodes[i]):
+                l["target"] = i
 
     return {"nodes":nodes, "links":links}
 
