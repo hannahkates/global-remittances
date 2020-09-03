@@ -17,37 +17,38 @@
   <h1>Global Flow of Remittances</h1>
   <!-- Create a div where the graph will take place -->
   <div id="chart"></div>
-  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="sankey.js"></script>
+  <script src="js.js"></script>
+  <!-- <script src="https://d3js.org/d3.v4.js"></script>
   <script src="https://unpkg.com/d3-array@1"></script>
   <script src="https://unpkg.com/d3-collection@1"></script>
   <script src="https://unpkg.com/d3-path@1"></script>
   <script src="https://unpkg.com/d3-shape@1"></script>
-  <script src="https://unpkg.com/d3-sankey@0"></script>
+  <script src="https://unpkg.com/d3-sankey@0"></script> -->
   <style>
-    body {
-      padding: 10px;
-      min-width: 600px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    #chart {
-      height: 500px;
-      font: 13px sans-serif;
-    }
+
     .node rect {
-      fill-opacity: .9;
-      shape-rendering: crispEdges;
-      stroke-width: 0;
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
     }
+
     .node text {
-      text-shadow: 0 1px 0 #fff;
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
     }
+
     .link {
-      fill: none;
-      stroke: #000;
-      stroke-opacity: .2;
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
     }
+
+    .link:hover {
+    stroke-opacity: .5;
+    }
+
   </style>
-  <script src="js.js"></script>
 </body>
 </html>
