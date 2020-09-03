@@ -21,7 +21,7 @@ var sankey = d3.sankey()
     .size([width, height]);
 
 // load the data
-d3.json("/data/data.json", function(error, graph) {
+d3.json("https://bost.ocks.org/mike/sankey/energy.json", function(error, graph) {
 
   const {nodes, links} = sankey(graph);
 
