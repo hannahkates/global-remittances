@@ -1,9 +1,9 @@
-var units = "Widgets";
+var units = "Million USD";
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 700 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    width = 1500 - margin.left - margin.right,
+    height = 800 - margin.top - margin.bottom;
 
 // format variables
 var formatNumber = d3.format(",.0f"),    // zero decimal places
@@ -20,14 +20,14 @@ var svg = d3.select("body").append("svg")
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
-    .nodeWidth(36)
-    .nodePadding(40)
+    .nodeWidth(20)
+    .nodePadding(20)
     .size([width, height]);
 
 var path = sankey.link();
 
 // load the data
-d3.json("sankey.json", function(error, graph) {
+d3.json("/data/data.json", function(error, graph) {
 
   sankey
       .nodes(graph.nodes)
@@ -69,10 +69,8 @@ d3.json("sankey.json", function(error, graph) {
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", function(d) {
-		  return d.color = color(d.name.replace(/ .*/, "")); })
-      .style("stroke", function(d) {
-		  return d3.rgb(d.color).darker(2); })
+      .style("fill", "blue")
+      .style("stroke", "black")
     .append("title")
       .text(function(d) {
 		  return d.name + "\n" + format(d.value); });

@@ -20,3 +20,6 @@ https://www.d3-graph-gallery.com/graph/network_data_format.html
 - Run python script to reformat the adjacency matrix CSV into a JSON format.
 
 ## How to run this application
+
+## Resources
+This build was guided by https://bl.ocks.org/d3noob/013054e8d7807dff76247b81b0e29030
