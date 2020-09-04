@@ -3,31 +3,65 @@ import json
 
 with open('Bilateralremittancematrix2018Oct2019.csv', newline='') as csvfile:
     mydata = list(csv.reader(csvfile))
+# note: sender countries are rows. recipient countries are columns.
 
 # function that consumes the adjacency matrix from the CSV and
 # outputs the final json structure for d3 chart containing nodes and links
-def convert(adjacency_list):
+def convert(adj_mtx):
 
     # specify minumum transfer $ amount to filter links by
-    min_transfer = 3000
+    min_transfer = 1000
 
     # create empty list called links that will store all the filtered links
     links = []
 
-    # identify all links that have values over the minimum transfer $ amount
-    for i,adj in enumerate(adjacency_list):
-        # skip row 0 since it contains country names, not data
-        if(i > 0):
-            # iterate through each item in the row, skipping column because it contains the country name
-            for n in range(1, len(adj)):
-                # three conditions for recording links:
-                # - avoid circular reference. a country shouldn't send remittances to itself
-                # - skips links where value is "N/A"
-                # - filter for links where value is more than minumum transfer $ amount
-                if (i != n) & (adj[n] != 'N/A'):
-                    if float(adj[n]) > min_transfer:
-                        # store the source and target country names and tranfer value
-                        links.extend( [{"source":adj[0],"target":mydata[0][n],"value":float(adj[n])}] )
+    # skip row 0 because it contains country labels
+    for i in range(1,len(adj_mtx[0])):
+
+        # get country label from column 0
+        sender = adj_mtx[i][0]
+
+        # save list of row's data as an object
+        row = adj_mtx[i]
+
+        # only look at columns for countries that haven't been iterated through yet
+        # this avoids the creation of duplicate links
+        for j in range(i+1, len(row)):
+
+            # get recipient country label from row 0
+            recipient = adj_mtx[0][j]
+
+            # how much did the sender send to the recipient?
+            sent = float(row[j].replace('N/A', '0'))
+
+            # how much did the recipient send back to the sender?
+            received = float(adj_mtx[j][i].replace('N/A', '0'))
+
+            # calculate net
+            net = sent-received
+
+            # exclude links where neither country sent money
+            if(abs(net) > 0):
+
+                # if sender sent more than they received back (positive net)
+                if(net > min_transfer):
+                    links.extend( [{
+                        "source":source,
+                        "target":target,
+                        "value":net,
+                        "sourceToTarget":sent,
+                        "targetToSource":received
+                    }] )
+
+                # if sender recevied more than they sent (negative net)
+                elif(abs(net) > min_transfer):
+                    links.extend( [{
+                        "source":target,
+                        "target":source,
+                        "value":-1*net,
+                        "sourceToTarget":received,
+                        "targetToSource":sent
+                    }] )
 
     # create an empty array for storing all the nodes present in the filtered links
     used_nodes = []
