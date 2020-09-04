@@ -6,7 +6,7 @@ This is a d3.js data visualization of remittances between all countries in the w
 ## Data source
 [World Bank, Bilateral Remittance Matrix 2018 (updated October 2019)](https://www.worldbank.org/en/topic/labormarkets/brief/migration-and-remittances)
 
-## Data preparationßßßßß
+## Data preparation
 The data published by the World Bank is stored in an excel spreadsheet in an adjacency matrix format. The d3 network chart must consume a JSON file formatted to a specific standard, listing all the "nodes" and then the "links". [Explanation of necessary JSON data structure](https://www.d3-graph-gallery.com/graph/network_data_format.html).
 
 **Data munging steps:**
