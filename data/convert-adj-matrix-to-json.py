@@ -9,6 +9,18 @@ with open('Bilateralremittancematrix2018Oct2019.csv', newline='') as csvfile:
 # outputs the final json structure for d3 chart containing nodes and links
 def convert(adj_mtx):
 
+    # create list of countries
+    countries = adj_mtx[0][1:]
+
+    # store length of list of countries for iteration
+    ctry_len = len(countries)
+
+    # create simpler matrix without country label row and column
+    adj_mtx = adj_mtx[1:ctry_len+1]
+
+    for row in adj_mtx:
+        row = row.pop(0)
+
     # specify minumum transfer $ amount to filter links by
     min_transfer = 1000
 
@@ -16,23 +28,21 @@ def convert(adj_mtx):
     links = []
 
     # skip row 0 because it contains country labels
-    for i in range(1,len(adj_mtx[0])):
+    for i in range(ctry_len):
 
         # get country label from column 0
-        sender = adj_mtx[i][0]
-
-        # save list of row's data as an object
-        row = adj_mtx[i]
+        sender = countries[i]
 
         # only look at columns for countries that haven't been iterated through yet
         # this avoids the creation of duplicate links
-        for j in range(i+1, len(row)):
+        # we also never want a case where j==i
+        for j in range(i+1, ctry_len):
 
             # get recipient country label from row 0
-            recipient = adj_mtx[0][j]
+            recipient = countries[j]
 
             # how much did the sender send to the recipient?
-            sent = float(row[j].replace('N/A', '0'))
+            sent = float(adj_mtx[i][j].replace('N/A', '0'))
 
             # how much did the recipient send back to the sender?
             received = float(adj_mtx[j][i].replace('N/A', '0'))
@@ -46,8 +56,8 @@ def convert(adj_mtx):
                 # if sender sent more than they received back (positive net)
                 if(net > min_transfer):
                     links.extend( [{
-                        "source":source,
-                        "target":target,
+                        "source":sender,
+                        "target":recipient,
                         "value":net,
                         "sourceToTarget":sent,
                         "targetToSource":received
@@ -56,8 +66,8 @@ def convert(adj_mtx):
                 # if sender recevied more than they sent (negative net)
                 elif(abs(net) > min_transfer):
                     links.extend( [{
-                        "source":target,
-                        "target":source,
+                        "source":recipient,
+                        "target":sender,
                         "value":-1*net,
                         "sourceToTarget":received,
                         "targetToSource":sent
@@ -94,8 +104,6 @@ def convert(adj_mtx):
 
     # final json structure for d3 chart
     return {"nodes":nodes, "links":links}
-
-convert(mydata)
 
 with open('data.json', 'w') as outfile:
     json.dump(convert(mydata), outfile)
