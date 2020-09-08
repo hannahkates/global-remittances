@@ -46,11 +46,11 @@ d3.json("data/data.json", function(error, graph) {
 // add the link titles
   link.append("title")
         .text(function(d) {
-    		return d.source.name + " → " + d.target.name + ":\n" +
+    		return d.source.name + " → " + d.target.name + ":\n~ " +
           format(d.sourceToTarget) + "\n\n" +
-          d.target.name + " → " + d.source.name + ":\n" +
+          d.target.name + " → " + d.source.name + ":\n~ " +
           format(d.targetToSource) + "\n\n" +
-          "Net:\n" +
+          "Net:\n~ " +
           format(d.value);
         });
 
