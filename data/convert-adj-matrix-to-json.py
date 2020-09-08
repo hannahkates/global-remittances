@@ -1,5 +1,6 @@
 import csv
 import json
+import random
 
 with open('Bilateralremittancematrix2018Oct2019.csv', newline='') as csvfile:
     mydata = list(csv.reader(csvfile))
@@ -91,7 +92,11 @@ def convert(adj_mtx):
     # nodes: it stores the node index in addition to the name
     # link: it updates the links object by replacing the node country names with indices
     for i in range(len(used_nodes)):
-        nodes.extend( [{"index":i, "name":used_nodes[i]}] )
+        nodes.extend( [{
+            "index":i,
+            "name":used_nodes[i],
+            "color":"#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
+        }] )
         for l in links:
             # if source country name == country name
             if (l["source"] == used_nodes[i]):

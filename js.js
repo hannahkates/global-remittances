@@ -1,9 +1,9 @@
 var units = "Billion USD";
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 1500 - margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom;
+var margin = {top: 10, right: 10, bottom: 10, left: 0},
+    width = getWidth() - margin.left - margin.right,
+    height = 900 - margin.top - margin.bottom;
 
 // format variables
 var formatNumber = d3.format(",.2f"),    // zero decimal places
@@ -26,13 +26,17 @@ var sankey = d3.sankey()
 
 var path = sankey.link();
 
+function getWidth() {
+  return document.getElementById("chart").offsetWidth;
+}
+
 // load the data
 d3.json("data/data.json", function(error, graph) {
 
   sankey
       .nodes(graph.nodes)
       .links(graph.links)
-      .layout(32);
+      .layout(12);
 
 // add in the links
   var link = svg.append("g").selectAll(".link")
@@ -42,6 +46,40 @@ d3.json("data/data.json", function(error, graph) {
       .attr("d", path)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; });
+
+  // add gradient to links
+  link.style('stroke', (d, i) => {
+    console.log('d from gradient stroke func', d);
+
+    // make unique gradient ids
+    const gradientID = `gradient${i}`;
+
+    const startColor = d.source.color;
+    const stopColor = d.target.color;
+
+    console.log('startColor', startColor);
+    console.log('stopColor', stopColor);
+
+    const linearGradient = svg.append('linearGradient')
+        .attr('id', gradientID);
+
+    linearGradient.selectAll('stop')
+      .data([
+          {offset: '10%', color: startColor },
+          {offset: '90%', color: stopColor }
+        ])
+      .enter().append('stop')
+      .attr('offset', d => {
+        console.log('d.offset', d.offset);
+        return d.offset;
+      })
+      .attr('stop-color', d => {
+        console.log('d.color', d.color);
+        return d.color;
+      });
+
+    return `url(#${gradientID})`;
+  })
 
 // add the link titles
   link.append("title")
@@ -74,7 +112,8 @@ d3.json("data/data.json", function(error, graph) {
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", "blue")
+      // .style("fill", "blue")
+      .style('fill', function(d) { return d.color; })
       .style("stroke", "black")
     .append("title")
       .text(function(d) {
