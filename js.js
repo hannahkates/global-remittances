@@ -1,4 +1,4 @@
-var units = "Million USD";
+var units = "Billion USD";
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
@@ -7,7 +7,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
 
 // format variables
 var formatNumber = d3.format(",.0f"),    // zero decimal places
-    format = function(d) { return formatNumber(d) + " " + units; },
+    format = function(d) { return formatNumber(d/1000) + " " + units; },
     color = d3.scaleOrdinal(d3.schemeCategory20);
 
 // append the svg object to the body of the page
