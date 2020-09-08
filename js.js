@@ -6,7 +6,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
     height = 1000 - margin.top - margin.bottom;
 
 // format variables
-var formatNumber = d3.format(",.0f"),    // zero decimal places
+var formatNumber = d3.format(",.2f"),    // zero decimal places
     format = function(d) { return formatNumber(d/1000) + " " + units; },
     color = d3.scaleOrdinal(d3.schemeCategory20);
 
@@ -46,8 +46,13 @@ d3.json("data/data.json", function(error, graph) {
 // add the link titles
   link.append("title")
         .text(function(d) {
-    		return d.source.name + " → " +
-                d.target.name + "\n" + format(d.value); });
+    		return d.source.name + " → " + d.target.name + ":\n" +
+          format(d.sourceToTarget) + "\n\n" +
+          d.target.name + " → " + d.source.name + ":\n" +
+          format(d.targetToSource) + "\n\n" +
+          "Net:\n" +
+          format(d.value);
+        });
 
 // add in the nodes
   var node = svg.append("g").selectAll(".node")
