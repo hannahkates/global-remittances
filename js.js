@@ -36,7 +36,7 @@ d3.json("data/data.json", function(error, graph) {
   sankey
       .nodes(graph.nodes)
       .links(graph.links)
-      .layout(12);
+      .layout(30);
 
 // add in the links
   var link = svg.append("g").selectAll(".link")

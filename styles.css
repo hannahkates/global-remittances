@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: "Tahoma";
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -11,16 +11,18 @@ body {
 }
 
 .node text {
+  font-size: 12px;
+  font-weight: bold;
   pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: -3px 0 5px #fff, 0 3px 5px #fff, 3px 0 5px #fff, 0 -3px 5px #fff;
 }
 
 .link {
   fill: none;
   stroke: #000;
-  stroke-opacity: .2;
+  stroke-opacity: .4;
 }
 
 .link:hover {
-  stroke-opacity: .5;
+  stroke-opacity: .9;
 }
