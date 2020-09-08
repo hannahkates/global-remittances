@@ -22,4 +22,6 @@ The data published by the World Bank is stored in an excel spreadsheet in an adj
 - Run using python dev server `python -m SimpleHTTPServer`
 
 ## Resources
-This build was guided by https://bl.ocks.org/d3noob/013054e8d7807dff76247b81b0e29030
+This build was guided by these blog posts:
+- https://bl.ocks.org/d3noob/013054e8d7807dff76247b81b0e29030
+- https://bl.ocks.org/micahstubbs/3c0cb0c0de021e0d9653032784c035e9
