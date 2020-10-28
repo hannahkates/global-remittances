@@ -19,7 +19,7 @@ The data published by the World Bank is stored in an excel spreadsheet in an adj
 
 ## Dependencies
 - d3 v4
-- d3-sankey. I copied the sankey code into the repo [copied the code directly into this repo](https://github.com/hannahkates/global-remittances/blob/master/js/sankey.js) because I had trouble finding a stable, secure link to a hosted version online.
+- d3 sankey. I copied the [sankey code](https://github.com/d3/d3-plugins/tree/master/sankey) into the repo [copied the code directly into this repo](https://github.com/hannahkates/global-remittances/blob/master/js/sankey.js) because I had trouble finding a stable, secure link to a hosted version online.
 - To implement tooltips, I used d3-tip.js written by Justin Palmer. I [copied the code directly into this repo](https://github.com/hannahkates/nyc-water/blob/master/js/d3-tip.js) because I had trouble finding a stable, secure link to a hosted version online.
 
 ## How to run this application locally
