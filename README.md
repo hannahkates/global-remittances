@@ -1,7 +1,7 @@
 # Data Viz: Global Flow of Remittances
 
 ## About
-This is a simple vanilla JavaScript application with a d3.js sankey data visualization. The chart displays the flow of remittances between all countries in the world over $3 billion. It shows the transfer relationships and estimated amounts. The repo also includes all the python script used prepare the data.
+This is a simple vanilla JavaScript application with a d3.js sankey data visualization. The chart displays the flow of remittances between all countries in the world over $3 billion. It shows the transfer relationships and estimated amounts. The repo also includes the python script used prepare the data.
 
 ## Data source
 [World Bank, Bilateral Remittance Matrix 2018 (updated October 2019)](https://www.worldbank.org/en/topic/labormarkets/brief/migration-and-remittances)
