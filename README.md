@@ -1,7 +1,7 @@
 # Data Viz: Global Flow of Remittances
 
 ## About
-This is a d3.js data visualization of remittances between all countries in the world. It shows the transfer relationships and estimated amounts.
+This is a simple vanilla JavaScript application with a d3.js data visualization of remittances between all countries in the world. It shows the transfer relationships and estimated amounts. The repo also includes all the python script used prepare the data.
 
 ## Data source
 [World Bank, Bilateral Remittance Matrix 2018 (updated October 2019)](https://www.worldbank.org/en/topic/labormarkets/brief/migration-and-remittances)
