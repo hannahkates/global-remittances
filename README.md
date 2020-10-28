@@ -17,6 +17,11 @@ The data published by the World Bank is stored in an excel spreadsheet in an adj
   - :warning: NOTE: This python script also filters which records to include based on the size of the transfer. The minimum is currently set to $3000 million, yielding ~30 country nodes. The app timed out when more nodes were included.
 - App uses [data.json](https://github.com/hannahkates/global-remittances/blob/master/data/data.json) outputted by the python script.
 
+## Dependencies
+- d3 v4
+- d3-sankey. I copied the sankey code into the repo [copied the code directly into this repo](https://github.com/hannahkates/global-remittances/blob/master/js/sankey.js) because I had trouble finding a stable, secure link to a hosted version online.
+- To implement tooltips, I used d3-tip.js written by Justin Palmer. I [copied the code directly into this repo](https://github.com/hannahkates/nyc-water/blob/master/js/d3-tip.js) because I had trouble finding a stable, secure link to a hosted version online.
+
 ## How to run this application locally
 - Clone repo `git clone https://github.com/hannahkates/global-remittances.git`
 - Run using python dev server `python -m SimpleHTTPServer`
