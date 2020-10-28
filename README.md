@@ -24,7 +24,7 @@ The data published by the World Bank is stored in an excel spreadsheet in an adj
 
 ## How to run this application locally
 - Clone repo `git clone https://github.com/hannahkates/global-remittances.git`
-- Run using python dev server `python -m SimpleHTTPServer`
+- Run using python dev server `python -m SimpleHTTPServer` (or other local server options like Atom Live Server)
 
 ## Resources
 This build was guided by these blog posts:
